@@ -11,3 +11,10 @@
   align-items: center;
   padding: 20px;
 }
+.title {
+  display: flex;
+  align-items: center;
+  font-size: 30px;
+  font-weight: 600;
+  gap: 10px;
+}
