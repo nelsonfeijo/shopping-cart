@@ -13,20 +13,21 @@ function Products () {
 
     fetchProducts('iphone').then((resp) => {
       setProducts(resp);
+      setLoading(false)
 
     });
   }, []);
 
 
   return ( 
-    (loading ?  <Loading /> : 
-
-    <section className="products container">
+    (loading && <Loading />)  || (
+      <section className="products container">
       {
         products.map((product) => <ProductCard key={product.id} data={product} />)
       }
     </section>
-   ));
+    ) 
+   );
 }
 
 export default Products;
