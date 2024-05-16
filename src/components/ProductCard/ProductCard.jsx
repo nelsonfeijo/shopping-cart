@@ -1,25 +1,38 @@
-import React from "react";
+import React, { useContext } from "react";
 import './ProductCard.css'
 import { FaCartPlus } from "react-icons/fa";
 import propTypes from 'prop-types'
 import formatCurrency from '../../utils/formatCurrency'
+import AppContext from "../../context/AppContext";
 
 
 
 function ProductCard({ data }) {
-  const { title, thumbnail, price } = data
+  const { title, thumbnail, price } = data;
 
-  return ( 
-    <section className="product-card"> 
+  const { cartItems, setCartItems } = useContext(AppContext);
 
-    <img src={thumbnail.replace(/\w\.jpg/gi, 'W.jpg')} alt="product" className="card__image"></img>
+  const handleAddCart = () => setCartItems([ ...cartItems, data ]);
 
-    <div className="card__infos">
-      <h2 className="card__price">{formatCurrency(price, 'BRL')}</h2>
-      <h2 className="card__title">{title}</h2>
-    </div>
+  return (
+    <section className="product-card">
+      
+      <img
+        src={thumbnail.replace(/\w\.jpg/gi, 'W.jpg')}
+        alt="product"
+        className="card__image"
+      />
 
-    <button type="button" className="button__add-cart"><FaCartPlus /></button>
+      <div className="card__infos">
+        <h2 className="card__price">{formatCurrency(price, 'BRL')}</h2>
+        <h2 className="card__title">{title}</h2>
+      </div>
+
+      <button
+        type="button"
+        className="button__add-cart"
+        onClick={ handleAddCart }
+      ><FaCartPlus /></button>
     </section>
    );
 }
